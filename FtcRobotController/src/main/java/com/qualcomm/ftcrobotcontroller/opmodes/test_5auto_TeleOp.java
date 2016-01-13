@@ -45,7 +45,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 public class test_5auto_TeleOp extends OpMode {
 
-    ColorSensorDriver driver = new ColorSensorDriver();
+    //ColorSensorDriver driver = new ColorSensorDriver();
 
 
     /*

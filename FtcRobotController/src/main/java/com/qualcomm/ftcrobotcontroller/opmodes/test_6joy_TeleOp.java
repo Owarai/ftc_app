@@ -31,10 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -43,19 +42,18 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  * Enables control of the robot via the gamepad
  */
-public class test_5auto_TeleOp extends OpMode {
+public class test_6joy_TeleOp extends OpMode {
 
 
 
+	Gamepad dpad_down = new Gamepad();
 
-    /*
-     * Note: the configuration of the servos is such that
-     * as the arm servo approaches 0, the arm position moves up (away from the floor).
-     * Also, as the claw servo approaches 0, the claw opens up (drops the game element).
-     */
+	/*
+	 * Note: the configuration of the servos is such that
+	 * as the arm servo approaches 0, the arm position moves up (away from the floor).
+	 * Also, as the claw servo approaches 0, the claw opens up (drops the game element).
+	 */
 	// TETRIX VALUES.
-
-
 
 	DcMotor motorRight;
 	DcMotor motorLeft;
@@ -63,7 +61,7 @@ public class test_5auto_TeleOp extends OpMode {
 	/**
 	 * Constructor
 	 */
-	public test_5auto_TeleOp() {
+	public test_6joy_TeleOp() {
 
 	}
 
@@ -118,6 +116,11 @@ public class test_5auto_TeleOp extends OpMode {
 		// 1 is full down
 		// direction: left_stick_x ranges from -1 to 1, where -1 is full left
 		// and 1 is full right
+
+		if (dpad_down == true) {
+
+		}
+
 		float throttle = -gamepad1.left_stick_y;
 		float direction = gamepad1.left_stick_x;
 		float right = throttle - direction;
@@ -135,6 +138,8 @@ public class test_5auto_TeleOp extends OpMode {
 		// write the values to the motors
 		motorRight.setPower(right);
 		motorLeft.setPower(left);
+
+		// update the position of the arm.
 
 
 

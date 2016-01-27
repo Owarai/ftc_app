@@ -35,6 +35,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * TeleOp Mode
  * <p>
@@ -157,11 +159,7 @@ public class test_auto extends OpMode {
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
 
-		try {
-			wait(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		java.lang.Object.wait(long 4);
 
 		turn = 1 - turn;
 

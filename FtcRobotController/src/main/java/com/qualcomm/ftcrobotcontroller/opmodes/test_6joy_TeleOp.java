@@ -117,9 +117,7 @@ public class test_6joy_TeleOp extends OpMode {
 		// direction: left_stick_x ranges from -1 to 1, where -1 is full left
 		// and 1 is full right
 
-		if (dpad_down == true) {
 
-		}
 
 		float throttle = -gamepad1.left_stick_y;
 		float direction = gamepad1.left_stick_x;

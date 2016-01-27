@@ -64,6 +64,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register ("test_2joy_TeleOp", test_2joy_TeleOp.class);
       manager.register ("test_3auto_TeleOp", test_2joy_TeleOp.class);
     manager.register ("test_buttons", test_buttons.class);
+    manager.register ("test_auto", test_auto.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.

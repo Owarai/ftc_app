@@ -33,7 +33,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -41,21 +40,24 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  * Enables control of the robot via the gamepad
  */
-public class test_buttons extends OpMode {
+public class test_auto extends OpMode {
 
 
 	DcMotor motorRight;
 	DcMotor motorLeft;
 
+
 	float throttle;
 	float direction;
+	int turn;
 
 	/**
 	 * Constructor
 	 */
-	public test_buttons() {
+	public test_auto() {
 		throttle = 0;
 		direction = 0;
+		turn = 0;
 	}
 
 	/*
@@ -86,8 +88,7 @@ public class test_buttons extends OpMode {
 		motorRight = hardwareMap.dcMotor.get("motor_2");
 		motorLeft = hardwareMap.dcMotor.get("motor_1");
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
-
-
+		
 
 	}
 
@@ -98,10 +99,6 @@ public class test_buttons extends OpMode {
 	 */
 	@Override
 	public void loop() {
-
-
-
-
 
 
 		/*
@@ -128,31 +125,16 @@ public class test_buttons extends OpMode {
 		motorRight.setPower(right);
 		motorLeft.setPower(left);
 
-		// update the position of the arm.
-		if (gamepad1.a) {
-			// if the A button is pushed on gamepad1, increment the position of
-			// the arm servo.
-			right += 0.02;
-			left -= 0.02;
+		if (turn == 0) {
+			right = 1;
+			left = 1;
+		}
+		else {
+			right = -1;
+			left = -1;
 		}
 
-		if (gamepad1.y) {
-			// if the Y button is pushed on gamepad1, decrease the position of
-			// the arm servo.
-			right -= 0.02;
-			left += 0.02;
-		}
 
-		// update the position of the claw
-		if (gamepad1.x) {
-			right = 0;
-			left = 0;
-		}
-
-		if (gamepad1.b) {
-			right *= 1.1;
-			left *= 1.1;
-		}
 
 
 		right = Range.clip(right, -1, 1);
@@ -174,6 +156,14 @@ public class test_buttons extends OpMode {
         telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+
+		try {
+			wait(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		turn = 1 - turn;
 
 	}
 

@@ -52,6 +52,7 @@ public class test_auto extends OpMode {
 	float throttle;
 	float direction;
 	int turn;
+	int count;
 
 	/**
 	 * Constructor
@@ -60,6 +61,7 @@ public class test_auto extends OpMode {
 		throttle = 0;
 		direction = 0;
 		turn = 0;
+		count = 0;
 	}
 
 	/*
@@ -124,8 +126,7 @@ public class test_auto extends OpMode {
 
 		
 		// write the values to the motors
-		motorRight.setPower(right);
-		motorLeft.setPower(left);
+
 
 		if (turn == 0) {
 			right = 1;
@@ -147,6 +148,8 @@ public class test_auto extends OpMode {
 		// the robot more precisely at slower speeds.
 		right = (float)scaleInput(right);
 		left =  (float)scaleInput(left);
+        motorRight.setPower(right);
+        motorLeft.setPower(left);
 
 
 		/*
@@ -158,10 +161,15 @@ public class test_auto extends OpMode {
         telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+		telemetry.addData("count to 300", "number: " + String.valueOf(count));
+		telemetry.addData("loop mode", "id: " + String.valueOf(turn));
 
-		java.lang.Object.wait(long 4);
+		count++;
 
-		turn = 1 - turn;
+		if (count > 300) {
+			turn = 1 - turn;
+			count = 0;
+		}
 
 	}
 

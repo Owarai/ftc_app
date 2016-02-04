@@ -49,6 +49,8 @@ public class test_buttons extends OpMode {
 
 	float throttle;
 	float direction;
+    double right;
+    double left;
 
 	/**
 	 * Constructor
@@ -56,6 +58,8 @@ public class test_buttons extends OpMode {
 	public test_buttons() {
 		throttle = 0;
 		direction = 0;
+        right = 0.4;
+        left = 0.4;
 	}
 
 	/*
@@ -116,8 +120,7 @@ public class test_buttons extends OpMode {
 		// direction: left_stick_x ranges from -1 to 1, where -1 is full left
 		// and 1 is full right
 
-		float right = throttle - direction;
-		float left = throttle + direction;
+
 
 		// clip the right/left values so that the values never exceed +/- 1
 
@@ -125,8 +128,7 @@ public class test_buttons extends OpMode {
 
 		
 		// write the values to the motors
-		motorRight.setPower(right);
-		motorLeft.setPower(left);
+
 
 		// update the position of the arm.
 		if (gamepad1.a) {
@@ -163,6 +165,9 @@ public class test_buttons extends OpMode {
 		// the robot more precisely at slower speeds.
 		right = (float)scaleInput(right);
 		left =  (float)scaleInput(left);
+
+		motorRight.setPower(right);
+		motorLeft.setPower(left);
 
 
 		/*
